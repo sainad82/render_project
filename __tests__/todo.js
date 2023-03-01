@@ -1,7 +1,7 @@
-/* eslint-disable no-undef */
-const request = require("supertest");
-const db = require("../models/index");
-const app = require("../app");
+const request = require("supertest")
+
+const db = require("../models/index")
+const app = require("../app")
 
 let server, agent;
 
@@ -17,7 +17,7 @@ describe("Todo test suite", () => {
   });
   test("responds with json at /todos", async () => {
     const response = await agent.post("/todos").send({
-      title: "BuyMilk",
+      title: "Buy Milk",
       dueDate: new Date().toISOString(),
       completed: false,
     });
@@ -28,20 +28,21 @@ describe("Todo test suite", () => {
     const parsedResponse = JSON.parse(response.text);
     expect(parsedResponse.id).toBeDefined();
   });
-  test("Mark as complete", async () => {
+  test("Mark a todo as complete", async () => {
     const response = await agent.post("/todos").send({
-      title: "BuyMilk",
+      title: "Buy Milk",
       dueDate: new Date().toISOString(),
       completed: false,
     });
     const parsedResponse = JSON.parse(response.text);
-    const todoId = parsedResponse.id;
+    const todoID = parsedResponse.id;
+
     expect(parsedResponse.completed).toBe(false);
 
-    const markAsCompleteResponse = await agent
-      .put(`/todos/${todoId}/markAsCompleted`)
+    const markCompleteResponse = await agent
+      .put(`/todos/${todoID}/markAsCompleted`)
       .send();
-    const parsedUpdateResponse = JSON.parse(markAsCompleteResponse.text);
+    const parsedUpdateResponse = JSON.parse(markCompleteResponse.text);
     expect(parsedUpdateResponse.completed).toBe(true);
   });
 });

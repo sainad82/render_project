@@ -1,6 +1,7 @@
-/* eslint-disable no-unused-vars */
-"use strict";
-const { Model } = require("sequelize");
+'use strict';
+const {
+  Model
+} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Todo extends Model {
     /**
@@ -8,27 +9,27 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static addTodo({ title, dueDate }) {
-      return this.create({ title: title, dueDate: dueDate, completed: false });
-    }
-
-    markAsComplete() {
-      return this.update({ completed: true });
-    }
+    // eslint-disable-next-line no-unused-vars
     static associate(models) {
       // define association here
     }
-  }
-  Todo.init(
-    {
-      title: DataTypes.STRING,
-      dueDate: DataTypes.DATEONLY,
-      completed: DataTypes.BOOLEAN,
-    },
-    {
-      sequelize,
-      modelName: "Todo",
+
+    static addTodo({title , dueDate}){
+      return this.create({ title :title, dueDate:dueDate,completed:false})
     }
-  );
+
+    markAsCompleted(){
+      return this.update({ completed : true });
+    }
+
+  }
+  Todo.init({
+    title: DataTypes.STRING,
+    dueDate: DataTypes.DATEONLY,
+    completed: DataTypes.BOOLEAN
+  }, {
+    sequelize,
+    modelName: 'Todo',
+  });
   return Todo;
 };
