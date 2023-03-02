@@ -1,11 +1,19 @@
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
+const path = require('path');
+
+app.set("view engine" , "ejs");
 app.use(bodyParser.json())
+// eslint-disable-next-line no-undef
+app.use(express.static(path.join(__dirname, "public")));
 
 const { Todo } = require("./models")
 
 
+app.get("/", (req, res) => {
+    res.render("index"); // index refers to index.ejs
+});
 
 // eslint-disable-next-line no-unused-vars
 app.get('/todos',(req,res) => {
