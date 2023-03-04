@@ -19,7 +19,8 @@ app.get("/",  async (req, res) => {
 
 // eslint-disable-next-line no-unused-vars
 app.get('/todos', async (req,res) => {
-    console.log(Todo.count());
+    const todoCount = await Todo.count();
+    res.render("index",todoCount);
 })
 
 app.post('/todos', async (req,res) => {
