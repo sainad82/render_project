@@ -11,14 +11,12 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/",  async (req, res) => {
     const allTodos = await Todo.getAllTodos();
-    if(req.accepts("html")){
-        res.render("index",{
-            allTodos
-        });
-    }
-    else{
-        res.json({allTodos}); // index refers to index.ejs
-    }
+    
+    res.render("index",{
+        allTodos
+    });
+    
+    
 });
 
 // eslint-disable-next-line no-unused-vars
