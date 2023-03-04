@@ -18,6 +18,15 @@ class Todo extends Model {
       return this.create({ title :title, dueDate:dueDate,completed:false})
     }
 
+    static getCount(){
+      return this.count();
+    }
+    
+    static getAllTodos(){
+      return this.findAll();
+    }
+
+
     markAsCompleted(){
       return this.update({ completed : true });
     }

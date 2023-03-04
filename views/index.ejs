@@ -4,7 +4,7 @@
    <meta charset="UTF-8" />
    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
    <title>Index page</title>
-   <link rel="stylesheet" href="/css/styles.css" />
+   <link rel="stylesheet" href="./css/styles.css" />
 
  </head>
  <body>
@@ -12,5 +12,18 @@
     <input class="newTodo" type = "text" placeholder="What's Next?">
     <input class="newTodo" type = "date">
     <button class="add">Add</button>
+    <% for (int i=0 ; i < allTodos.length ; i++) { %>
+      <table>
+        <tr>
+          <%= allTodos[i].title %>
+        </tr>
+        <tr>
+          <%= allTodos[i].dueDate %>
+        </tr>
+        <tr>
+          <%= allTodos[i].completed %>
+        </tr>
+      </table>
+    <% } %>
  </body>
 </html>

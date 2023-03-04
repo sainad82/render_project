@@ -3,8 +3,6 @@ const app = express()
 const bodyParser = require('body-parser')
 const path = require('path');
 
-
-
 app.set("view engine" , "ejs");
 app.use(bodyParser.json())
 // eslint-disable-next-line no-undef
@@ -13,8 +11,21 @@ app.use(express.static(path.join(__dirname, "public")));
 const { Todo } = require("./models")
 
 
-app.get("/", (req, res) => {
+app.get("/totTodos",  async (req, res) => {
+    const todoCount = await Todo.getCount();
     res.render("index"); // index refers to index.ejs
+});
+
+app.get("/",  async (req, res) => {
+    const allTodos = await Todo.getAllTodos();
+    if(res.accepts("html")){
+        res.render("index",{
+            allTodos
+        });
+    }
+    else{
+        res.json({allTodos}); // index refers to index.ejs
+    }
 });
 
 // eslint-disable-next-line no-unused-vars
