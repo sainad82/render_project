@@ -2,6 +2,8 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 const path = require('path');
+const { connect } = require("./connectDB.js");
+
 
 app.set("view engine" , "ejs");
 app.use(bodyParser.json())
@@ -16,11 +18,13 @@ app.get("/", (req, res) => {
 });
 
 // eslint-disable-next-line no-unused-vars
-app.get('/todos',(req,res) => {
-    console.log("Creating a todo");
+app.get('/todos', async (req,res) => {
+    await connect();
+    console.log(Todo.count());
 })
 
 app.post('/todos', async (req,res) => {
+    await connect();
     console.log("Todo List");
     try{
         const todo = await Todo.addTodo({ title:req.body.title ,dueDate:req.body.dueDate,completed:false})

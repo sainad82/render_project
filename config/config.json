@@ -14,9 +14,9 @@
     "dialect": "postgres"
   },
   "production": {
-    "username": "postgres",
-    "password": "sai6248",
-    "database": "wd_todo_prod",
+    "username": "postgre",
+    "password": "sv0Wte0HludywzIIVm5vld38XL2WuBnJ",
+    "database": "todo_h2vh",
     "host": "127.0.0.1",
     "dialect": "postgres"
   }
