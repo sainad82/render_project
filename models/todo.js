@@ -17,10 +17,6 @@ class Todo extends Model {
     static addTodo({title , dueDate}){
       return this.create({ title :title, dueDate:dueDate,completed:false})
     }
-
-    static getCount(){
-      return this.count();
-    }
     
     static getAllTodos(){
       return this.findAll();
