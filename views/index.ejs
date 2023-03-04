@@ -12,6 +12,9 @@
     <input class="newTodo" type = "text" placeholder="What's Next?">
     <input class="newTodo" type = "date">
     <button class="add">Add</button>
+    <% if(todoCount) { %>
+      <h1> <%= todoCount %> </h1>
+    <% } %>
     <table>
       <% for (var i = 0 ; i < allTodos.length ; i++) { %>
         
