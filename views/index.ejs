@@ -12,18 +12,14 @@
     <input class="newTodo" type = "text" placeholder="What's Next?">
     <input class="newTodo" type = "date">
     <button class="add">Add</button>
-    <% for (int i=0 ; i < allTodos.length ; i++) { %>
-      <table>
-        <tr>
-          <%= allTodos[i].title %>
-        </tr>
-        <tr>
-          <%= allTodos[i].dueDate %>
-        </tr>
-        <tr>
-          <%= allTodos[i].completed %>
-        </tr>
-      </table>
-    <% } %>
+    <table>
+      <% for (var i = 0 ; i < allTodos.length ; i++) { %>
+        
+          <tr>
+            <%= allTodos[i].title %>
+          </tr>
+        
+      <% } %>
+  </table>
  </body>
 </html>

@@ -11,11 +11,9 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/",  async (req, res) => {
     const allTodos = await Todo.getAllTodos();
-    
     res.render("index",{
         allTodos
-    });
-    
+    });  
     
 });
 
