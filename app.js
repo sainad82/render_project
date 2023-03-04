@@ -11,7 +11,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/",  async (req, res) => {
     const allTodos = await Todo.getAllTodos();
-    if(res.accepts("html")){
+    if(req.accepts("html")){
         res.render("index",{
             allTodos
         });
