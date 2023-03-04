@@ -1,4 +1,27 @@
 body {
     font-family: sans-serif;
-    background: #cccccc;
+    color:grey;
+    margin-left:50px;
+    margin-top:50px;
+}
+
+.newTodo{
+    justify-content: space-between;
+    width:200px;
+    padding:13px;
+    border-radius: 8px;
+    outline-color: blue;
+
+}
+
+.add{
+    color:white;
+    background-color: #4CAF50;
+    padding:13px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.add:hover{
+    background-color: cornflowerblue;
 }
