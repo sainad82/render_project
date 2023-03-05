@@ -10,28 +10,14 @@ app.use(bodyParser.json())
 app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/",  async (req, res) => {
-    const allTodos = await Todo.getAllTodos();
+    var overdueTodosList = await Todo.getAllTodos();
     res.render("index",{
-        allTodos
-    });  
-    
+        overdueTodosList
+    });     
 });
 
-// eslint-disable-next-line no-unused-vars
-app.get('/todos', async (req,res) => {
-    const todoCount = await Todo.count();
-    res.render("index",todoCount);
-})
-
 app.post('/todos', async (req,res) => {
-    console.log("Todo List");
-    try{
-        const todo = await Todo.addTodo({ title:req.body.title ,dueDate:req.body.dueDate,completed:false})
-        return res.json(todo);
-    }catch(error){
-        console.log(error)
-        return res.status(422).json(error)
-    }
+    const todo = await Todo.addTodo({ title:req.body.title ,dueDate:req.body.dueDate,completed:false})
 })
 
 app.put('/todos/:id/markAsCompleted', async (req,res) => {

@@ -1,8 +1,10 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap');
+
 body {
-    font-family: sans-serif;
+
     color:grey;
-    margin-left:50px;
-    margin-top:50px;
+    background:  #FFFFFF;
 }
 
 .newTodo{
@@ -11,8 +13,10 @@ body {
     padding:13px;
     border-radius: 8px;
     outline-color: blue;
-
 }
+.Todo-Item:hover .trash-icon{
+    display: block;
+  }
 
 .add{
     color:white;
