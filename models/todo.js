@@ -22,8 +22,6 @@ class Todo extends Model {
       return this.findAll();
     }
 
-    
-
     markAsCompleted(){
       return this.update({ completed : true });
     }
