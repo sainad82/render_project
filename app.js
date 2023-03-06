@@ -34,13 +34,14 @@ app.put('/todos/:id/markAsCompleted', async (req,res) => {
     const todo = await Todo.findByPk(req.params.id);
     try {
         const updatedTodo = await todo.markAsCompleted()
-        return res.json(updatedTodo)
     }
     catch(error){
         console.log(error)
         return res.status(422).json(error);
     }
 })
+
+
 
 
 module.exports = app;

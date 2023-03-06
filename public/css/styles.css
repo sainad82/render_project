@@ -1,31 +1,14 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap');
-
 body {
-
+    font-family: sans-serif;
     color:grey;
     background:  #FFFFFF;
+    padding:40px;
+}
+h5{
+    color: black;
+    font-weight:bold;
 }
 
-.newTodo{
-    justify-content: space-between;
-    width:200px;
-    padding:13px;
-    border-radius: 8px;
-    outline-color: blue;
-}
 .Todo-Item:hover .trash-icon{
     display: block;
   }
-
-.add{
-    color:white;
-    background-color: #4CAF50;
-    padding:13px;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-.add:hover{
-    background-color: cornflowerblue;
-}
