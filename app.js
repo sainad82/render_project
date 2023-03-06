@@ -12,10 +12,11 @@ app.use(express.static(path.join(__dirname, "public")));
 app.get("/",  async (req, res) => {
     const alltodos = await Todo.getAllTodos();
 
-    const currentDate = new Date();
-    const overdueTodos = alltodos.filter(todo => todo.dueDate < currentDate.toISOString().split('T')[0]);
-    const dueTodayTodos = alltodos.filter(todo => todo.dueDate === currentDate.toISOString().split('T')[0]);
-    const dueLaterTodos = alltodos.filter(todo => todo.dueDate > currentDate.toISOString().split('T')[0]);
+    const currentDate = new Date().toISOString().split('T')[0];
+
+    const overdueTodos = alltodos.filter(todo => todo.dueDate < currentDate);
+    const dueTodayTodos = alltodos.filter(todo => todo.dueDate === currentDate);
+    const dueLaterTodos = alltodos.filter(todo => todo.dueDate > currentDate);
     res.render("index",{
         overdueTodos:overdueTodos,
         dueTodayTodos:dueTodayTodos,
