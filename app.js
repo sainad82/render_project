@@ -8,12 +8,11 @@ app.set("view engine" , "ejs");
 app.use(bodyParser.json())
 // eslint-disable-next-line no-undef
 app.use(express.static(path.join(__dirname, "public")));
+app.use(express.urlencoded({extended:false}));
 
 app.get("/",  async (req, res) => {
     const alltodos = await Todo.getAllTodos();
-
     const currentDate = new Date().toISOString().split('T')[0];
-
     const overdueTodos = alltodos.filter(todo => todo.dueDate < currentDate);
     const dueTodayTodos = alltodos.filter(todo => todo.dueDate === currentDate);
     const dueLaterTodos = alltodos.filter(todo => todo.dueDate > currentDate);
@@ -25,7 +24,13 @@ app.get("/",  async (req, res) => {
 });
 
 app.post('/todos', async (req,res) => {
-    const todo = await Todo.addTodo({ title:req.body.title ,dueDate:req.body.dueDate,completed:false})
+    const todo = await Todo.addTodo(
+        { 
+            title:req.body.title ,
+            dueDate:req.body.dueDate,
+            completed:false
+        });
+    res.redirect("/");
 })
 
 app.put('/todos/:id/markAsCompleted', async (req,res) => {
@@ -42,6 +47,11 @@ app.put('/todos/:id/markAsCompleted', async (req,res) => {
 })
 
 
+app.delete('/deleteTodo/:id',async (req,res) => {
+    const todo = await Todo.findByPk(req.params.id)
+    await Todo.deleteTodo(todo);
+    res.send("index");
+})
 
 
 module.exports = app;

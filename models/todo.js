@@ -22,6 +22,14 @@ class Todo extends Model {
       return this.findAll();
     }
 
+    static deleteTodo(todo){
+      this.destroy({
+        where:{
+          id:todo.id
+        }
+      });
+    }
+
     markAsCompleted(){
       return this.update({ completed : true });
     }
