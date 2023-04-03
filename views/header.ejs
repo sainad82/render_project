@@ -6,5 +6,37 @@
    <title>Index page</title>
    <link rel="stylesheet" href="./css/styles.css" />
    <script src="https://cdn.tailwindcss.com"></script>
+   <script>
+    function update(id){
+      fetch(`/todos/${id}/markAsCompleted`,{
+        method:"put",
+        headers:{"Content-Type":"application/json"},
+      })
+      .then((res) => {
+        if(res.ok){
+          window.location.reload();
+        } 
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+    }
+
+    function deleteTodo(id){
+      fetch(`/todos/${id}`,{
+        method:"delete",
+        headers:{"Content-Type":"application/json"},
+      })
+      .then((res) => {
+        if(res.ok){
+          window.location.reload();
+        } 
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+    }
+   </script>
  </head>
   <h1 class="text-2xl font-semibold text-gray-600">My Todo-List</h1>
+  

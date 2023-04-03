@@ -16,11 +16,20 @@ app.get("/",  async (req, res) => {
     const overdueTodos = alltodos.filter(todo => todo.dueDate < currentDate);
     const dueTodayTodos = alltodos.filter(todo => todo.dueDate === currentDate);
     const dueLaterTodos = alltodos.filter(todo => todo.dueDate > currentDate);
-    res.render("index",{
-        overdueTodos:overdueTodos,
-        dueTodayTodos:dueTodayTodos,
-        dueLaterTodos:dueLaterTodos
-    });     
+    if(req.accepts('html')){
+        res.render("index",{
+            overdueTodos:overdueTodos,
+            dueTodayTodos:dueTodayTodos,
+            dueLaterTodos:dueLaterTodos
+        }); 
+    }
+    else{
+        res.json({
+            overdueTodos,
+            dueTodayTodos,
+            dueLaterTodos
+        })
+    }     
 });
 
 app.post('/todos', async (req,res) => {
@@ -47,10 +56,16 @@ app.put('/todos/:id/markAsCompleted', async (req,res) => {
 })
 
 
-app.delete('/deleteTodo/:id',async (req,res) => {
+app.delete('/todos/:id',async (req,res) => {
     const todo = await Todo.findByPk(req.params.id)
-    await Todo.deleteTodo(todo);
-    res.send("index");
+    try{
+        await Todo.remove(req.params.id);
+        return res.json({success : true});
+    }
+    catch(error){
+        return res.status(422).json(error);
+    }
+    
 })
 
 

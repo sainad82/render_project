@@ -22,10 +22,10 @@ class Todo extends Model {
       return this.findAll();
     }
 
-    static deleteTodo(todo){
-      this.destroy({
+    static async remove(id){
+      return this.destroy({
         where:{
-          id:todo.id
+          id,
         }
       });
     }
