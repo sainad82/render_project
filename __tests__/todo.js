@@ -56,4 +56,30 @@ describe("Todo test suite", () => {
     const parsedUpdatedResponse = JSON.parse(markCompleteResponse.text);
     expect(parsedUpdatedResponse.completed).toBe(true);
   });
+
+  test("Deleting a Todo",async ()=>{
+    let res = await agent.get("/todos");
+    let csrfToken = extractCsrfToken(res);
+    await agent.post("/todos").send({
+      title: "Buy Milk",
+      dueDate: new Date().toISOString(),
+      completed: false,
+      _csrf:csrfToken,
+    });
+    const groupedTodosResponse = await agent
+    .get("/todos")
+    .set("Accept","application/json");
+    const parsedGroupedResponse = JSON.parse(groupedTodosResponse.text);
+    const dueTodayCount = parsedGroupedResponse.dueTodayTodos.length;
+    const latestTodo = parsedGroupedResponse.dueTodayTodos[dueTodayCount-1];
+
+    res = await agent.get("/todos");
+    csrfToken = extractCsrfToken(res);
+    
+    const deletedResponse = await agent.delete(`/todos/${latestTodo.id}`).send({
+      _csrf:csrfToken
+    })
+    const parsedUpdateResponse = JSON.parse(deletedResponse.text);
+    expect(parsedUpdateResponse.success).toBe(true);
+  })
 });
