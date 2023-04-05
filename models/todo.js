@@ -34,6 +34,10 @@ class Todo extends Model {
       return this.update({ completed : true });
     }
 
+    setCompletionStatus(state){
+      return this.update({ completed : state });
+    }
+
   }
   Todo.init({
     title: DataTypes.STRING,

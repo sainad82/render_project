@@ -3,14 +3,22 @@
  <head>
    <meta charset="UTF-8" />
    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <meta name="csrf-token" content="<%= csrfToken %>" />
    <title>Index page</title>
    <link rel="stylesheet" href="./css/styles.css" />
    <script src="https://cdn.tailwindcss.com"></script>
    <script>
-    function update(id){
-      fetch(`/todos/${id}/markAsCompleted`,{
+    var token = document
+      .querySelector('meta[name="csrf-token"]')
+      .getAttribute("content")
+    function update(id,updationVal){
+      fetch(`/todos/${id}`,{
         method:"put",
         headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({
+          completed:!updationVal,
+          "_csrf":token
+        })
       })
       .then((res) => {
         if(res.ok){
@@ -23,9 +31,15 @@
     }
 
     function deleteTodo(id){
+      var token = document
+        .querySelector('meta[name="csrf-token"]')
+        .getAttribute("content")
       fetch(`/todos/${id}`,{
         method:"delete",
         headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({
+          "_csrf":token
+        })
       })
       .then((res) => {
         if(res.ok){
