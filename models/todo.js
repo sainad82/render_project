@@ -12,20 +12,28 @@ class Todo extends Model {
     // eslint-disable-next-line no-unused-vars
     static associate(models) {
       // define association here
+      Todo.belongsTo(models.User,{
+        foreignKey: 'userId'
+      })
     }
 
-    static addTodo({title , dueDate}){
-      return this.create({ title :title, dueDate:dueDate,completed:false})
+    static addTodo({title , dueDate , userId}){
+      return this.create({ title :title, dueDate:dueDate,completed:false ,userId});
     }
     
-    static getAllTodos(){
-      return this.findAll();
+    static getAllTodos(userId){
+      return this.findAll({
+        where:{
+          userId,
+        }
+      });
     }
 
-    static async remove(id){
+    static async remove(id,userId){
       return this.destroy({
         where:{
           id,
+          userId
         }
       });
     }

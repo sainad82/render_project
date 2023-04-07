@@ -1,26 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <meta name="csrf-token" content="<%= csrfToken %>" />
+   <title><%= title %></title>
+   <link rel="stylesheet" href="./css/styles.css" />
+   <script src="https://cdn.tailwindcss.com"></script>
+  </head>
  <body>
   <div class="grid grid-cols-5">
     <div class="col-start-3 col-span-2">
       <%- include('header.ejs') %>
+      <p class="py-2">Welcome to the TO-DO Manager</p>
+      <p class="py-2">New here? <a href="/signup" class="text-green-600">Sign-Up now</a></p>
+      <p class="py-2">Already Have an account? <a href="/login" class="text-green-600">Sign-in</a></p>
     </div>
   </div>
-  <form action="/todos" method="POST">
-    <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
-    <div class="flex gap-2 py-4">
-      <div class="flex-auto w-64">
-        <input type="text" name="title" class="border border-gray-300 text-gray-900 text-sm rounded w-full p-2" placeholder="What's next?" autofocus required >
-      </div>
-      <div class="flex-auto w-32">
-        <input type="date" name="dueDate" class="border border-gray-300 text-gray-900 text-sm rounded w-full p-2 leading-4" required>
-      </div>
-      <div class="flex-none">
-        <button type="submit" class="text-white bg-green-600 hover:bg-green-700 font-medium rounded text-sm px-5 py-2 mr-2 mb-2">Add</button>
-      </div>            
-    </div>
-  </form>
-  <div class="mt-2">
-    <%- include('todo.ejs') %>
-  </div>
-     
  </body>
 </html>

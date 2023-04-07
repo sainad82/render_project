@@ -4,53 +4,9 @@
    <meta charset="UTF-8" />
    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
    <meta name="csrf-token" content="<%= csrfToken %>" />
-   <title>Index page</title>
+   <title><%= title %></title>
    <link rel="stylesheet" href="./css/styles.css" />
    <script src="https://cdn.tailwindcss.com"></script>
-   <script>
-    var token = document
-      .querySelector('meta[name="csrf-token"]')
-      .getAttribute("content")
-    function update(id,updationVal){
-      fetch(`/todos/${id}`,{
-        method:"put",
-        headers:{"Content-Type":"application/json"},
-        body:JSON.stringify({
-          completed:!updationVal,
-          "_csrf":token
-        })
-      })
-      .then((res) => {
-        if(res.ok){
-          window.location.reload();
-        } 
-      })
-      .catch((err) => {
-        console.error(err);
-      })
-    }
-
-    function deleteTodo(id){
-      var token = document
-        .querySelector('meta[name="csrf-token"]')
-        .getAttribute("content")
-      fetch(`/todos/${id}`,{
-        method:"delete",
-        headers:{"Content-Type":"application/json"},
-        body:JSON.stringify({
-          "_csrf":token
-        })
-      })
-      .then((res) => {
-        if(res.ok){
-          window.location.reload();
-        } 
-      })
-      .catch((err) => {
-        console.error(err);
-      })
-    }
-   </script>
  </head>
   <h1 class="text-2xl font-semibold text-gray-600">My Todo-List</h1>
   
